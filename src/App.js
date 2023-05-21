@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './Navbar'
 
-function App() {
+
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import Home from './components/Home'
+import Footer from './components/Footer'
+import SingleProducts from "./components/SingleProducts"
+
+import Tenu from './components/Tenu'
+import Contact from './components/Contact'
+import Men from './components/Men'
+import Women from './components/Women'
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/products/:id' element={<SingleProducts />} />
+        <Route path='/tenue' element={<Tenu />} />
+        <Route path='/women' element={<Women />} />
+        <Route path='/men' element={<Men />} />
+        <Route path='/contact' element={<Contact />} />
+       
+      </Routes>
+
+      <Footer />
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
