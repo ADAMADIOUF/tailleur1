@@ -10,10 +10,12 @@ import Tenu from './components/Tenu'
 import Contact from './components/Contact'
 import Men from './components/Men'
 import Women from './components/Women'
+import WhatsAppButton from './components/WhatsAppButton'
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
+     <WhatsAppButton/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products/:id' element={<SingleProducts />} />
@@ -21,7 +23,6 @@ const App = () => {
         <Route path='/women' element={<Women />} />
         <Route path='/men' element={<Men />} />
         <Route path='/contact' element={<Contact />} />
-       
       </Routes>
 
       <Footer />

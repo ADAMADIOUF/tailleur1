@@ -76,7 +76,7 @@ const ProductsCategories = () => {
           Femmes
         </button>
         <button
-          onClick={() => handleCategoryFilter('tenues')}
+          onClick={() => handleCategoryFilter('tenue')}
           className={selectedCategory === 'tenue' ? 'active' : null}
         >
           Tenues

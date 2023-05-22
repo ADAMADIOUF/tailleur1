@@ -494,32 +494,76 @@ nav {
 }
 /* SingleProduct */
 .container-singleProduct {
-  margin-top: 10rem;
-  padding: 0 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
 }
-.img-fluid {
+
+.container-singleProduct .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.container-singleProduct .col-md-6 {
+  flex: 0 0 100%;
   max-width: 100%;
-  height: auto;
 }
 
 .singleProduct-details {
-  margin-top: 5rem;
+  margin-bottom: 20px;
 }
+
 .s-p {
+  margin-top: 10px;
+}
+
+.cartDetails {
+  margin-top: 20px;
+}
+
+.row {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.s-p h3 {
-  font-size: 2rem;
+.col {
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
-.s-p p {
-  margin-left: 1rem;
-  font-size: 1.5rem;
+.color-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
+
+.size-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.size-item {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media (min-width: 992px) {
+  .container-singleProduct .row {
+    justify-content: space-between;
+  }
+
+  .container-singleProduct .col-md-6 {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+}
+
 
 /* Contact.css */
 
@@ -711,4 +755,47 @@ button[type='submit']:hover {
   .about-image {
     max-width: 200px;
   }
+}
+/* Whatsapp */
+.whatsapp-button {
+  /* Define your styles here */
+  background-color: var(--clr-primary-1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+
+.whatsapp-button:hover {
+  /* Define your hover styles here */
+  background-color: darkgreen;
+  cursor: pointer;
+}
+
+/* Color & Size */
+.color-badge {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.color-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.size-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.size-item {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

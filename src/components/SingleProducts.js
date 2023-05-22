@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productsActions'
 
 import { formatPrice } from '../utils/helpers'
+import ProductImages from './ProductImages'
 
 const ProductDetails = () => {
   const [qty, setQty] = useState(1)
@@ -13,19 +14,25 @@ const ProductDetails = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const [showWhatsAppWidget, setShowWhatsAppWidget] = useState(false)
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
 
   useEffect(() => {
     dispatch(listProductDetails(id, true))
   }, [dispatch, id])
-const handleAddToCart = () => {
-  
-}
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location])
+
+  const handleAddToCart = () => {
+    const message = `je veux acheter ${product.name} x${qty}`
+    const url = `https://wa.me/+221779258508?text=${encodeURIComponent(
+      message
+    )}`
+    window.open(url, '_blank')
+  }
 
   return (
     <div className='container-singleProduct'>
@@ -36,16 +43,21 @@ const handleAddToCart = () => {
       ) : (
         <div className='row'>
           <div className='col-md-6'>
-            {/* Display product image */}
-            <img src={product.img} alt='' className='img-fluid' />
+            {product && product.img ? (
+              <ProductImages images={product.img} />
+            ) : null}
           </div>
           <div className='col-md-6'>
             <article>
               <div className='singleProduct-details'>
-                <h3>{product.name}</h3>
-                <div className='s-p'>
-                  <h3>{formatPrice(product.price)}</h3>
-                  <p>{product.description}</p>
+                <div className='row'>
+                  <div className='col'>
+                    <h3>{product.name}</h3>
+                    <div className='s-p'>
+                      <h3>{formatPrice(product.price)}</h3>
+                      <p>{product.desc}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>
@@ -55,10 +67,35 @@ const handleAddToCart = () => {
                 <div className='col'>{formatPrice(product.price)}</div>
               </div>
               <div className='row'>
-                <p>{product.desc}</p>
+                <div className='col'>Couleur:</div>
+                <div className='col color-container'>
+                  {product.color &&
+                    product.color.map((color, index) => (
+                      <span
+                        key={index}
+                        style={{ backgroundColor: color }}
+                        className='color-badge'
+                      ></span>
+                    ))}
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col'>Taille:</div>
+                <div className='col size-container'>
+                  {product.size &&
+                    product.size.map((size, index) => (
+                      <span key={index} className='size-item'>
+                        {size}
+                      </span>
+                    ))}
+                </div>
+              </div>
+              <div className='row'>
                 <div className='col'>Status:</div>
                 <div className='col'>
-                  {product.countInStock > 0 ? 'En stock.' : 'Out of stock'}
+                  {product.countInStock > 0
+                    ? 'En stock.'
+                    : 'en rupture de stock'}
                 </div>
               </div>
               {product.countInStock > 0 && (
@@ -87,13 +124,15 @@ const handleAddToCart = () => {
                 </div>
               )}
               <div className='list-group-item'>
-                <button
-                  onClick={handleAddToCart}
-                  className='btn btn-primary btn-block'
-                  disabled={product.countInStock === 0}
-                >
-                  ajouter au panier
+                <button onClick={handleAddToCart} className='whatsapp-button'>
+                  acheter par whatsapp
                 </button>
+                {showWhatsAppWidget && (
+                  <WhatsAppWidget
+                    phoneNumber='+221777618072'
+                    message={`je veux acheter ${product.name}`}
+                  />
+                )}
               </div>
             </article>
           </div>
