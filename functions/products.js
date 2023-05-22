@@ -9,6 +9,8 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
 exports.handler = async (event, context, cb) => {
   try {
     const response = await airtable.list({ maxRecords: 200 })
+    // ...
+
     const products = response.records.map((product) => {
       const { id, fields } = product
       const {
@@ -21,10 +23,13 @@ exports.handler = async (event, context, cb) => {
         price,
         featured,
         men,
-        countInStock,women,
+        countInStock,
+        women,
         tenue,
       } = fields
-      const { url } = img[0]
+
+      // Convert img to an array of URLs
+      const images = Array.isArray(img) ? img.map((item) => item.url) : []
 
       return {
         id,
@@ -34,7 +39,7 @@ exports.handler = async (event, context, cb) => {
         women,
         tenue,
         countInStock,
-        img: url,
+        img: images,
         desc,
         color,
         size,
@@ -42,6 +47,8 @@ exports.handler = async (event, context, cb) => {
         price,
       }
     })
+
+    // ...
 
     return {
       statusCode: 200,

@@ -4,7 +4,6 @@ import WhatsAppWidget from './Whatsapp'
 import 'react-whatsapp-widget/dist/index.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productsActions'
-
 import { formatPrice } from '../utils/helpers'
 import ProductImages from './ProductImages'
 
@@ -17,6 +16,8 @@ const ProductDetails = () => {
   const [showWhatsAppWidget, setShowWhatsAppWidget] = useState(false)
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
+  const [selectedSize, setSelectedSize] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
 
   useEffect(() => {
     dispatch(listProductDetails(id, true))
@@ -27,11 +28,13 @@ const ProductDetails = () => {
   }, [location])
 
   const handleAddToCart = () => {
-    const message = `je veux acheter ${product.name} x${qty}`
-    const url = `https://wa.me/+221779258508?text=${encodeURIComponent(
-      message
-    )}`
-    window.open(url, '_blank')
+    if (selectedSize && selectedColor) {
+      const message = `je veux acheter ${product.name} x${qty} - Size: ${selectedSize}, Color: ${selectedColor}`
+      const url = `https://wa.me/+221779258508?text=${encodeURIComponent(
+        message
+      )}`
+      window.open(url, '_blank')
+    }
   }
 
   return (
@@ -41,7 +44,7 @@ const ProductDetails = () => {
       ) : error ? (
         <h2>error</h2>
       ) : (
-        <div className='row'>
+        <div className='row section-center'>
           <div className='col-md-6'>
             {product && product.img ? (
               <ProductImages images={product.img} />
@@ -73,8 +76,13 @@ const ProductDetails = () => {
                     product.color.map((color, index) => (
                       <span
                         key={index}
-                        style={{ backgroundColor: color }}
+                        style={{
+                          backgroundColor: color,
+                          border:
+                            selectedColor === color ? '2px solid #000' : 'none',
+                        }}
                         className='color-badge'
+                        onClick={() => setSelectedColor(color)}
                       ></span>
                     ))}
                 </div>
@@ -84,7 +92,13 @@ const ProductDetails = () => {
                 <div className='col size-container'>
                   {product.size &&
                     product.size.map((size, index) => (
-                      <span key={index} className='size-item'>
+                      <span
+                        key={index}
+                        className={`size-item ${
+                          selectedSize === size ? 'active' : ''
+                        }`}
+                        onClick={() => setSelectedSize(size)}
+                      >
                         {size}
                       </span>
                     ))}
@@ -124,7 +138,13 @@ const ProductDetails = () => {
                 </div>
               )}
               <div className='list-group-item'>
-                <button onClick={handleAddToCart} className='whatsapp-button'>
+                <button
+                  onClick={handleAddToCart}
+                  className={`whatsapp-button ${
+                    selectedSize && selectedColor ? '' : 'disabled'
+                  }`}
+                  disabled={!selectedSize || !selectedColor}
+                >
                   acheter par whatsapp
                 </button>
                 {showWhatsAppWidget && (

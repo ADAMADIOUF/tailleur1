@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -23,10 +24,11 @@ const Footer = () => {
           </a>
         </div>
         <div className='footer-links'>
-          <a href='#'>Home</a>
-          <a href='#'>Shop</a>
-          <a href='#'>About</a>
-          <a href='#'>Contact</a>
+          <Link to='/'>Accueil</Link>
+          <Link to='/tenue'>Tenues</Link>
+          <Link to='/women'>Femmes</Link>
+          <Link to='/men'>Hommes</Link>
+          <Link to='/contact'>Contact</Link>
         </div>
       </div>
       <div className='footer-bottom'>

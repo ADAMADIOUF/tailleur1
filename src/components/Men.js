@@ -28,7 +28,7 @@ const Men = () => {
             {products.map((product) => (
               <li key={product._id} className='product'>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.img} alt='' className='product-img' />
+                  <img src={product.img[0]} alt='' className='product-img' />
                   <div className='product-info'>
                     <h3 className='product-name'>{product.name}</h3>
                     <p className='product-price'>{product.price}CFA</p>

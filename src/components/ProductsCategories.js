@@ -4,6 +4,7 @@ import { listProducts } from '../actions/productsActions'
 import { listCategories } from '../actions/productsActions'
 import './ProductsCategories.css'
 import { Link } from 'react-router-dom'
+import { formatPrice } from '../utils/helpers'
 
 const ProductsCategories = () => {
   const dispatch = useDispatch()
@@ -95,11 +96,11 @@ const ProductsCategories = () => {
                   <h3> {product.name}</h3>
 
                   <img
-                    src={product.img}
+                    src={product.img[0]}
                     alt=''
                     style={{ width: '100%', height: '400px' }}
                   className='product-categories-img'/>
-                  <h3>{product.price}CFA</h3>
+                  <h3>{formatPrice( product.price)}</h3>
                   <h3>{product.name}</h3>
                 </Link>
               </li>

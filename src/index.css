@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Babylonica&family=Calligraffitti&family=Henny+Penny&family=Lato:wght@100;300;400&family=League+Spartan:wght@200;300;400;500&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@100;200;300;400&family=Nunito:wght@200;400&family=Poppins:wght@100;200;300&display=swap');
 :root {
 
-  --clr-primary-1: #FF4136;
+  --clr-primary-1: #ff4136;
   --clr-primary-2: #B22222;
   --clr-primary-3: #FFDB58 ;
   --clr-primary-4: #DAA520;
@@ -197,8 +197,8 @@ p {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #ffffff;
-  /* Add any other styles you want for the navbar */
+  background-color:var(--clr-white);
+  line-height: 1.5;
 }
 
 nav {
@@ -206,10 +206,11 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+
 }
 
 .logo img {
- width: 10rem;
+ width: 15rem;
  object-fit: cover;
  height: auto;
 }
@@ -492,6 +493,39 @@ nav {
     margin-right: 1rem;
   }
 }
+/* ProductImages */
+.product-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.thumbnail-images {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.thumbnail-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.thumbnail-img.active {
+  border-color:var(--clr-primary-1);
+}
+
 /* SingleProduct */
 .container-singleProduct {
   display: flex;
@@ -534,23 +568,46 @@ nav {
   flex: 0 0 50%;
   max-width: 50%;
 }
+.color-container {
+  display: flex;
+  align-items: center;
+}
 
+.color-badge {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.color-badge.active {
+   background-color: green;
+}
 .color-container {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
 }
-
 .size-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
 }
 
 .size-item {
+  display: inline-block;
   padding: 5px 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.size-item.active {
+  background-color: var(--clr-primary-1);
 }
 
 @media (min-width: 992px) {
@@ -774,28 +831,3 @@ button[type='submit']:hover {
   cursor: pointer;
 }
 
-/* Color & Size */
-.color-badge {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-.color-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.size-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.size-item {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
