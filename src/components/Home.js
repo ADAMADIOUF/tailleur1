@@ -7,6 +7,7 @@ import Featured from './Featured'
 import About from './About'
 import LastBanner from './LastBanner'
 import { useLocation } from 'react-router-dom'
+import BackToTop from './BackToTop'
 
 const Home = () => {
   const location = useLocation()
@@ -17,7 +18,7 @@ const Home = () => {
   return (
     <div>
      <Slider/>
-   
+   <BackToTop/>
      <Categories/>
      <ProductsCategories/>
      <Banner/>
